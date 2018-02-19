@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+<title> Cost Estimation</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"> </script>
+</head>
+<body onload="init()">
+<center>
+     <div id="input_form">
+        <form>
+            <table>
+              <tr>
+                <td><h3>Enter the reqirements</h3></td></tr>
+              <tr>
+                <td>No. Of Seats: </td> 
+                <td><input id="no_of_seats" type="number" name="no_of_seats" placeholder="1">&nbsp;&nbsp;&nbsp;&nbsp; </td>
+              </tr>
+              <tr>
+                <td>Cost/Seat:</td>
+                <td><input id="seat_cost" type="number" name="seat_cost" placeholder="1.0" step="0.01" min="0" max="1000000"></td>
+              </tr>
+              <tr>
+                <td>Rent: </td>
+                <td><input id="rent" type="number" name="rent" placeholder="1">&nbsp;&nbsp;&nbsp;&nbsp; </td>
+              </tr>
+              <tr>
+                <td>CAM: </td>
+                <td><input id="cam"  type="number" name="cam" placeholder="1">&nbsp;&nbsp;&nbsp;&nbsp; </td>
+              </tr>
+              </table>
+        </form> 
+        <br><br>
+    <button type="button" onclick="calculate()">calculate</button>
+   </div>
+    <br><br><br><br><br><br>
+
+
+   <div id="output_form">
+        <form>
+            <table border="5" width="500">
+              <tr>
+                <td colspan="4"><h3>&nbsp;&nbsp;&nbsp;&nbsp; Cost Estimation</h3></td>
+              </tr>
+              <tr>
+                <td></td> 
+                <td></td> 
+                <td>Area</td>
+                <td>Cost/Seat</td>
+              </tr>
+              <tr>
+                <td>No. Of Seats: </td> 
+                <td><div id="o_seats"></div></td>
+                <td><div id="o_seats_area"></div></td>
+                <td><div id="o_seats_cost_per_seat"></div></td>
+              </tr>
+              <tr>
+                <td>Rent: </td> 
+                <td><div id="o_rent"></div></td>
+                <td><div id="o_rent_area"></div></td>
+                <td><div id="o_rent_cost_per_seat"></div></td>
+              </tr>
+              <tr>
+                <td>CAM: </td> 
+                <td><div id="o_cam"></div></td>
+                <td><div id="o_cam_area"></div></td>
+                <td><div id="o_cam_cost_per_seat"></div></td>
+              </tr>
+              <tr>
+                <td>Fit Out: </td> 
+                <td><div id="o_fitout"></div></td>
+                <td><div id="o_fitout_area"></div></td>
+                <td><div id="o_fitout_cost_per_seat"></div></td>
+              </tr>
+              <tr>
+                <td>Electricity: </td> 
+                <td><div id="o_elec"></div></td>
+                <td><div id="o_elec_area"></div></td>
+                <td><div id="o_elec_cost_per_seat"></div></td>
+              </tr>
+              <tr>
+                <td>Housekeeping: </td> 
+                <td><div id="o_hkeep"></div></td>
+                <td><div id="o_hkeep_area"></div></td>
+                <td><div id="o_hkeep_cost_per_seat"></div></td>
+              </tr>
+              <tr>
+                <td>Internet: </td> 
+                <td><div id="o_internet"></div></td>
+                <td><div id="o_internet_area"></div></td>
+                <td><div id="o_internet_cost_per_seat"></div></td>
+              </tr>
+              <tr>
+                <td>Security : </td> 
+                <td><div id="o_security">1</div></td>
+                <td><div id="o_security_area">80.00</div></td>
+                <td><div id="o_security_cost_per_seat"></div></td>
+              </tr>
+              <tr>
+                <td>Pantry: </td> 
+                <td><div id="o_pantry"></div></td>
+                <td><div id="o_pantry_area"></div></td>
+                <td><div id="o_pantry_cost_per_seat"></div></td>
+              </tr>
+              <tr>
+                <td>Maintainance: </td> 
+                <td><div id="o_main"></div></td>
+                <td><div id="o_main_area"></div></td>
+                <td><div id="o_main_cost_per_seat"></div></td>
+              </tr>
+               <tr>
+                <td>Admin : </td> 
+                <td><div id="o_admin"></div></td>
+                <td><div id="o_admin_area"></div></td>
+                <td><div id="o_admin_cost_per_seat"></div></td>
+              </tr>
+              <tr>
+                <td>Miscellaneous: </td> 
+                <td><div id="o_mis"></div></td>
+                <td><div id="o_mis_area"></div></td>
+                <td><div id="o_mis_cost_per_seat"></div></td>
+              </tr>
+              <tr>
+                <td colspan="4"></td> 
+              </tr>
+               <tr>
+                <td colspan="2"> &nbsp;&nbsp;&nbsp;&nbsp; Total Costing </td> 
+                <td><div id="o_total_area"></div></td>
+                <td><div id="o_total_cost_per_seat"></div></td>
+              </tr>
+              <tr>
+                <td colspan="2"> &nbsp;&nbsp;&nbsp;&nbsp; Cost after discount </td> 
+                <td><div id="o_total_dis_area"></div></td>
+              </tr>
+              <tr>
+                <td colspan="2"> &nbsp;&nbsp;&nbsp;&nbsp; Saving percentage </td> 
+                <td><div id="o_saving_per"></div></td>
+              </tr>
+              </table>
+        </form> 
+        <br><br>
+    <button type="button" onclick="init()">Go Back</button>
+    </div>
+    
+    <br><br><br><br><br><br>
+
+</center>
+
+<script>
+function init(){
+    $("#input_form").show();
+    $("#output_form").hide(); 
+}
+
+function calculate(){
+    $("#input_form").hide();
+    $("#output_form").show();
+    var no_of_seats = document.getElementById('no_of_seats').value; //B3
+    var seat_cost = document.getElementById('seat_cost').value; //E3
+    var rent = document.getElementById('rent').value; // B6
+    var cam = document.getElementById('cam').value; // B7
+    var area = 80.00 * no_of_seats //C3
+    var fitout = 30 // B8
+    var elec = 15 //  B9
+    var hkeep = 15000 // B10
+    var internet = 2500 // B11
+    var sec = 18000 // B12
+    var pantry = 750 // B13
+    var main = 5  //B14
+    var admin = 5 //B15
+    var mis = 5  //B16
+    
+    document.getElementById("o_seats").innerHTML=no_of_seats; 
+    document.getElementById("o_seats_area").innerHTML=(no_of_seats*80.00).toFixed(2); 
+    document.getElementById("o_seats_cost_per_seat").innerHTML=seat_cost;
+    
+    document.getElementById("o_rent").innerHTML=seat_cost;
+    document.getElementById("o_rent_area").innerHTML=(area * rent).toFixed(2); 
+    document.getElementById("o_rent_cost_per_seat").innerHTML=(no_of_seats * seat_cost).toFixed(2);  
+    
+    document.getElementById("o_cam").innerHTML=cam;
+    document.getElementById("o_cam_area").innerHTML=(area* cam).toFixed(2); 
+    document.getElementById("o_cam_cost_per_seat").innerHTML="";
+      
+    document.getElementById("o_fitout").innerHTML=fitout;
+    document.getElementById("o_fitout_area").innerHTML=(area * fitout).toFixed(2); 
+    document.getElementById("o_fitout_cost_per_seat").innerHTML="";
+      
+    document.getElementById("o_elec").innerHTML=elec;
+    document.getElementById("o_elec_area").innerHTML=(area * elec).toFixed(2); 
+    document.getElementById("o_elec_cost_per_seat").innerHTML="";
+    
+    document.getElementById("o_hkeep").innerHTML=hkeep;
+    document.getElementById("o_hkeep_area").innerHTML=((area/2500.00)* hkeep).toFixed(2); 
+    document.getElementById("o_hkeep_cost_per_seat").innerHTML="";
+    
+    document.getElementById("o_internet").innerHTML=internet;
+    document.getElementById("o_internet_area").innerHTML=((no_of_seats/2)* internet).toFixed(2); 
+    document.getElementById("o_internet_cost_per_seat").innerHTML="";
+    
+    document.getElementById("o_security").innerHTML=sec;
+    document.getElementById("o_security_area").innerHTML=(sec * 2).toFixed(2); 
+    document.getElementById("o_security_cost_per_seat").innerHTML="";
+    
+    document.getElementById("o_pantry").innerHTML=pantry;
+    document.getElementById("o_pantry_area").innerHTML=(pantry * no_of_seats).toFixed(2); 
+    document.getElementById("o_pantry_cost_per_seat").innerHTML="";
+    
+    document.getElementById("o_main").innerHTML=main;
+    document.getElementById("o_main_area").innerHTML=(main * area).toFixed(2); 
+    document.getElementById("o_main_cost_per_seat").innerHTML="";
+    
+    document.getElementById("o_admin").innerHTML=admin;
+    document.getElementById("o_admin_area").innerHTML=(admin * area).toFixed(2); 
+    document.getElementById("o_admin_cost_per_seat").innerHTML="";
+    
+    document.getElementById("o_mis").innerHTML=mis;
+    document.getElementById("o_mis_area").innerHTML=(mis * area).toFixed(2); 
+    document.getElementById("o_mis_cost_per_seat").innerHTML="";
+    
+    var total = (area * rent)+(area* cam)+(area * fitout)+(area * elec)+((area/2500.00)* hkeep)+((no_of_seats/2)* internet)+(sec * 2)+(pantry * no_of_seats)+(main * area)+(admin * area)+(mis * area)
+    
+    var discount = (no_of_seats * seat_cost)
+    document.getElementById("o_total_area").innerHTML=total.toFixed(2); 
+    document.getElementById("o_total_cost_per_seat").innerHTML=discount.toFixed(2);
+    
+    document.getElementById("o_total_dis_area").innerHTML=(total - discount ).toFixed(2); 
+    
+    var per = ((discount/total)*100).toFixed(2)
+    
+    document.getElementById("o_saving_per").innerHTML=per; 
+    
+}
+</script>
+
+
+
+</body>
+</html>
+
