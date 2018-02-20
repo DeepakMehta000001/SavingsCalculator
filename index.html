@@ -8,6 +8,24 @@
 </head>
 <body onload="init()">
 <center>
+    <!--div id="select_location">
+    <h3>Select a location</h3>
+    <select>
+      <option value="Summer Court">Summer Court</option>
+      <option value="Pride Baner">Pride Baner</option>
+      <option value="Nyati Unitree">Nyati Unitree</option>
+      <option value="Vardhman Trade Centre">Vardhman Trade Centre</option>
+      <option value="Umiya Business Bay">Umiya Business Bay</option>
+      <option value="Paras Downtown Center">Paras Downtown Center</option>
+      <option value="Time Square Building">Time Square Building</option>
+      <option value="Logix Cyber Park">Logix Cyber Park</option>
+      <option value="Victoria Park Building">Victoria Park Building</option>
+      <option value="Indiabulls Finance Center">Indiabulls Finance Center</option>
+      <option value="Guindy">Guindy</option>
+      <option value="Purva Summit Hi Tech">Purva Summit Hi Tech</option>
+      <option value="Fleet House">Fleet House</option>
+    </select>
+    </div-->
      <div id="input_form">
         <form>
             <table>
@@ -15,7 +33,7 @@
                 <td><h3>Enter the requirements</h3></td></tr>
               <tr>
                 <td>No. Of Seats: </td> 
-                <td><input id="no_of_seats" type="number" name="no_of_seats" placeholder="1" required>&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td><input id="no_of_seats" type="number" name="no_of_seats" min="1" placeholder="1" required>&nbsp;&nbsp;&nbsp;&nbsp; </td>
               </tr>
               <tr>
                 <td>Cost/Seat:</td>
@@ -23,11 +41,11 @@
               </tr>
               <tr>
                 <td>Rent: </td>
-                <td><input id="rent" type="number" name="rent" placeholder="1" required>&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td><input id="rent" type="number" name="rent" placeholder="1" min="1"  required>&nbsp;&nbsp;&nbsp;&nbsp; </td>
               </tr>
               <tr>
                 <td>CAM: </td>
-                <td><input id="cam"  type="number" name="cam" placeholder="1" required>&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td><input id="cam"  type="number" name="cam" placeholder="1" min="1"  required>&nbsp;&nbsp;&nbsp;&nbsp; </td>
               </tr>
               </table>
         </form> 
@@ -137,10 +155,14 @@
                 <td colspan="2"> &nbsp;&nbsp;&nbsp;&nbsp; Saving percentage </td> 
                 <td><div id="o_saving_per"></div></td>
               </tr>
+              <tr>
+                <td colspan="2"> &nbsp;&nbsp;&nbsp;&nbsp;Stamp Duty</td> 
+                <td><div id="o_stamp_duty"></div></td>
+              </tr>
               </table>
         </form> 
         <br><br>
-    <button type="button" onclick="init()">Go Back</button>
+    <!--button type="button" onclick="init()">Go Back</button-->
     </div>
     
     <br><br><br><br><br><br>
@@ -154,7 +176,7 @@ function init(){
 }
 
 function calculate(){
-    $("#input_form").hide();
+    //$("#input_form").hide();
     $("#output_form").show();
     var no_of_seats = document.getElementById('no_of_seats').value; //B3
     var seat_cost = document.getElementById('seat_cost').value; //E3
@@ -175,7 +197,7 @@ function calculate(){
     document.getElementById("o_seats_area").innerHTML=(no_of_seats*80.00).toFixed(2); 
     document.getElementById("o_seats_cost_per_seat").innerHTML=seat_cost;
     
-    document.getElementById("o_rent").innerHTML=seat_cost;
+    document.getElementById("o_rent").innerHTML=rent;
     document.getElementById("o_rent_area").innerHTML=(area * rent).toFixed(2); 
     document.getElementById("o_rent_cost_per_seat").innerHTML=(no_of_seats * seat_cost).toFixed(2);  
     
@@ -230,7 +252,10 @@ function calculate(){
     var per = ((discount/total)*100).toFixed(2)
     
     document.getElementById("o_saving_per").innerHTML=per; 
+   
+    var stamp_duty = ((total*12)*0.012).toFixed(2)
     
+    document.getElementById("o_stamp_duty").innerHTML=stamp_duty; 
 }
 </script>
 
