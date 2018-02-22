@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
-<title> Cost Estimation</title>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"> </script>
+	<meta charset="utf-8">
+	<title>Savings Calculator</title>
+
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body onload="init()">
-<center>
+
     <!--div id="select_location">
     <h3>Select a location</h3>
     <select>
@@ -26,14 +34,20 @@
       <option value="Fleet House">Fleet House</option>
     </select>
     </div-->
-     <div id="input_form">
+    <div class="container">
+    <center>
+		<div class="top">
+			<h1 id="title" class="hidden"><span id="logo">Saving Calculator</span></span></h1>
+		</div>
+     <div id="input_form" class="login-box animated fadeInUp">
+        
         <form>
             <table>
               <tr>
                 <td><h3>Enter the requirements</h3></td></tr>
               <tr>
                 <td>No. Of Seats: </td> 
-                <td><input id="no_of_seats" type="number" name="no_of_seats" min="1" placeholder="1" required>&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td><input id="no_of_seats" type="number" name="no_of_seats" min="1" placeholder="1" required> </td>
               </tr>
               <tr>
                 <td>Cost/Seat:</td>
@@ -41,11 +55,11 @@
               </tr>
               <tr>
                 <td>Rent: </td>
-                <td><input id="rent" type="number" name="rent" placeholder="1" min="1"  required>&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td><input id="rent" type="number" name="rent" placeholder="1" min="1"  required> </td>
               </tr>
               <tr>
                 <td>CAM: </td>
-                <td><input id="cam"  type="number" name="cam" placeholder="1" min="1"  required>&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td><input id="cam"  type="number" name="cam" placeholder="1" min="1"  required> </td>
               </tr>
               </table>
         </form> 
@@ -55,7 +69,7 @@
     <br><br><br><br><br><br>
 
 
-   <div id="output_form">
+   <div id="output_form" class="login-box animated fadeInUp">
         <form>
             <table border="5" width="500">
               <tr>
@@ -168,6 +182,8 @@
     <br><br><br><br><br><br>
 
 </center>
+
+</div>
 
 <script>
 function init(){
