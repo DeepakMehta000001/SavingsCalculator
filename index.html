@@ -37,7 +37,7 @@
     <div class="container">
     <center>
 		<div class="top">
-			<h1 id="title" class="hidden"><span id="logo">Saving Calculator</span></span></h1>
+			<h1 id="title" class="hidden"><span id="logo">Smartworks <br> Savings Calculator</span></span></h1>
 		</div>
      <div id="input_form" class="login-box animated fadeInUp">
         
@@ -51,7 +51,7 @@
               </tr>
               <tr>
                 <td>Cost/Seat:</td>
-                <td><input id="seat_cost" type="number" name="seat_cost" placeholder="1.0" step="0.01" min="0" max="1000000" required></td>
+                <td colspan="2"><input id="seat_cost" type="number" name="seat_cost" placeholder="1.0" step="0.01" min="0" max="1000000" required></td>
               </tr>
               <tr>
                 <td>Rent: </td>
@@ -176,7 +176,7 @@
               </table>
         </form> 
         <br><br>
-    <!--button type="button" onclick="init()">Go Back</button-->
+    <button type="button" onclick="init()">Go Back</button>
     </div>
     
     <br><br><br><br><br><br>
@@ -192,7 +192,7 @@ function init(){
 }
 
 function calculate(){
-    //$("#input_form").hide();
+    $("#input_form").hide();
     $("#output_form").show();
     var no_of_seats = document.getElementById('no_of_seats').value; //B3
     var seat_cost = document.getElementById('seat_cost').value; //E3
