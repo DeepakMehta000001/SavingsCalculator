@@ -265,7 +265,7 @@ function calculate(){
     
     document.getElementById("o_total_dis_area").innerHTML=(total - discount ).toFixed(2); 
     
-    var per = ((discount/total)*100).toFixed(2)
+    var per = (((total-discount)/total)*100).toFixed(2)
     
     document.getElementById("o_saving_per").innerHTML=per; 
    
